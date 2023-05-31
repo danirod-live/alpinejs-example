@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
+    <style>
+        .done { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <div x-data="{ tasks: [
+        { id: 1, name: 'comprar verduras', completed: false },
+        { id: 2, name: 'hacer la cama', completed: true },
+        { id: 3, name: 'tirar la basura', completed: false }
+    ] }">
+        <template x-for="task in tasks" :key="task.id">
+            <p>
+                <input x-bind:id="`id-${task.id}`" type="checkbox" x-bind:checked="task.completed" x-on:click="() => task.completed = !task.completed">
+                <label x-bind:for="`id-${task.id}`" x-text="task.name" x-bind:class="task.completed ? 'done' : ''"></label>
+            </p>
+        </template>
+
+        <textarea x-html="JSON.stringify(tasks)" rows="25" cols="80"></textarea>
+    </div>
+</body>
+</html>
